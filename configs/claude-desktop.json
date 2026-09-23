@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "packetexchange": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://packetexchange.io/mcp/sse", "--transport", "sse-only"]
+    }
+  }
+}

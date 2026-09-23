@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/PacketExchangeIO/packetexchange-mcp/schemas/vscode-mcp.schema.json",
+  "title": "VS Code mcp.json",
+  "description": "The workspace .vscode/mcp.json format, limited to a remote SSE server.",
+  "type": "object",
+  "required": ["servers"],
+  "additionalProperties": false,
+  "properties": {
+    "servers": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["type", "url"],
+        "additionalProperties": false,
+        "properties": {
+          "type": { "const": "sse" },
+          "url": { "const": "https://packetexchange.io/mcp/sse" }
+        }
+      }
+    }
+  }
+}

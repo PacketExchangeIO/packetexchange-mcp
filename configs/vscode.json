@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "packetexchange": {
+      "type": "sse",
+      "url": "https://packetexchange.io/mcp/sse"
+    }
+  }
+}
