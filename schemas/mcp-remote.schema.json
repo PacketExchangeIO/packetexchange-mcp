@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/PacketExchangeIO/packetexchange-mcp/schemas/mcp-remote.schema.json",
+  "title": "mcpServers configuration using the mcp-remote bridge",
+  "description": "The mcpServers file format for clients that start MCP servers as local commands, bridged to the hosted server with mcp-remote and an Authorization header taken from the environment.",
+  "type": "object",
+  "required": ["mcpServers"],
+  "additionalProperties": false,
+  "properties": {
+    "mcpServers": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["command", "args", "env"],
+        "additionalProperties": false,
+        "properties": {
+          "command": { "const": "npx" },
+          "args": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "allOf": [
+              { "contains": { "const": "mcp-remote" } },
+              { "contains": { "const": "https://packetexchange.io/mcp/http" } },
+              { "contains": { "const": "--header" } },
+              { "contains": { "const": "Authorization:${PACKETEXCHANGE_AUTH_HEADER}" } }
+            ]
+          },
+          "env": {
+            "type": "object",
+            "required": ["PACKETEXCHANGE_AUTH_HEADER"],
+            "additionalProperties": false,
+            "properties": {
+              "PACKETEXCHANGE_AUTH_HEADER": { "type": "string", "pattern": "^Bearer \\S+$" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

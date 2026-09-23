@@ -2,7 +2,18 @@
   "mcpServers": {
     "packetexchange": {
       "command": "npx",
-      "args": ["-y", "mcp-remote", "https://packetexchange.io/mcp/sse", "--transport", "sse-only"]
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://packetexchange.io/mcp/http",
+        "--transport",
+        "http-only",
+        "--header",
+        "Authorization:${PACKETEXCHANGE_AUTH_HEADER}"
+      ],
+      "env": {
+        "PACKETEXCHANGE_AUTH_HEADER": "Bearer YOUR_API_KEY"
+      }
     }
   }
 }

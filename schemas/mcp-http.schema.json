@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/PacketExchangeIO/packetexchange-mcp/schemas/mcp-http.schema.json",
+  "title": "mcpServers configuration for a remote HTTP server",
+  "description": "The mcpServers file format for clients that connect to a remote Streamable HTTP server directly and send the API key in an Authorization header read from the environment.",
+  "type": "object",
+  "required": ["mcpServers"],
+  "additionalProperties": false,
+  "properties": {
+    "mcpServers": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["url", "headers"],
+        "additionalProperties": false,
+        "properties": {
+          "type": { "const": "http" },
+          "url": { "const": "https://packetexchange.io/mcp/http" },
+          "headers": {
+            "type": "object",
+            "required": ["Authorization"],
+            "additionalProperties": false,
+            "properties": {
+              "Authorization": {
+                "enum": ["Bearer ${PACKETEXCHANGE_API_KEY}", "Bearer ${env:PACKETEXCHANGE_API_KEY}"]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

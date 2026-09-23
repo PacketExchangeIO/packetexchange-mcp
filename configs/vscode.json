@@ -1,8 +1,19 @@
 {
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "packetexchange-api-key",
+      "description": "PacketExchange API key",
+      "password": true
+    }
+  ],
   "servers": {
     "packetexchange": {
-      "type": "sse",
-      "url": "https://packetexchange.io/mcp/sse"
+      "type": "http",
+      "url": "https://packetexchange.io/mcp/http",
+      "headers": {
+        "Authorization": "Bearer ${input:packetexchange-api-key}"
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "packetexchange-mcp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Documentation and client configurations for the PacketExchange MCP server.",
   "license": "MIT",

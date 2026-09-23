@@ -4,11 +4,12 @@ An agent connected to PacketExchange can spend your balance, send messages and p
 
 ## How the key reaches the server
 
-- Connecting to the server needs no credentials, and the three public tools (`wmmn_list_routes`, `wmmn_route_details`, `wmmn_market_summary`) never need a key.
-- Every other tool has a required `api_key` argument, and that argument is the only place the server reads a key from. It does not accept a key in a connection header, an environment variable or the client configuration.
-- A key given to a tool as an argument is visible to the model and is saved in your client's conversation history, together with everything the tool returns.
+- Your MCP client sends the key in an `Authorization: Bearer <key>` header on its requests to the server. That header is the only place the server reads a key from; no tool takes a key as an argument.
+- The key therefore never passes through the model and is not stored in the conversation history. It lives in your client configuration, an environment variable or your client's secret store, depending on the client (see the [setup guides](setup/)).
+- The three public tools (`wmmn_list_routes`, `wmmn_route_details`, `wmmn_market_summary`) work without a key.
+- Anything a tool returns does enter the conversation. Some results contain credentials; see below.
 
-Treat any key you use with account tools as exposed to the conversation, and choose the key accordingly.
+Protect the key where your client keeps it: a configuration file that contains a key must not be shared or committed, and a key in an environment variable is visible to every program started from that environment.
 
 ## Recommendations
 
@@ -21,14 +22,14 @@ Treat any key you use with account tools as exposed to the conversation, and cho
    | Look up your purchased routes and balance | `routes:read`, `account:read` |
    | Phone verification | `verify:write` |
    | Send SMS | `sms:send` |
-   | Place calls or read passcodes by voice | `voice:send` |
+   | Place and follow calls, or read passcodes by voice | `voice:send` |
 
    Avoid full-access keys (keys created without scopes). `wmmn_list_purchases` needs one, so leave it out unless you need it.
 4. **Set an expiry.** Give the key an expiry date when you create it, and revoke it when you are done.
 5. **Limit what it can spend.** Test with a small amount of credit. Keep the balance on the account the agent uses no higher than you are willing to lose.
-6. **Never paste your main API key into a chat.** Do not put keys in prompts, shared conversations, screenshots, issues or configuration files that are committed to version control.
+6. **Never paste an API key into a chat.** The server never needs it there. Do not put keys in prompts, shared conversations, screenshots, issues or configuration files that are committed to version control.
 7. **Review before anything is sent.** Configure your client to ask for approval before it calls tools that spend money or change state. Their descriptions start by saying so.
-8. **Watch for credentials in results.** `wmmn_purchase_route` and `wmmn_list_purchases` return SIP passwords, and `switch_create_customer` returns a new API key. These also end up in the conversation history.
+8. **Watch for credentials in results.** `wmmn_purchase_route` and `wmmn_list_purchases` return SIP passwords, and `switch_create_customer` returns a new API key. These end up in the conversation history.
 
 ## If a key is exposed
 

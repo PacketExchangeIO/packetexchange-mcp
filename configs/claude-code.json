@@ -1,9 +1,10 @@
 {
   "mcpServers": {
     "packetexchange": {
+      "type": "http",
       "url": "https://packetexchange.io/mcp/http",
       "headers": {
-        "Authorization": "Bearer ${env:PACKETEXCHANGE_API_KEY}"
+        "Authorization": "Bearer ${PACKETEXCHANGE_API_KEY}"
       }
     }
   }

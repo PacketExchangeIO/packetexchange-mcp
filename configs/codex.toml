@@ -1,0 +1,3 @@
+[mcp_servers.packetexchange]
+url = "https://packetexchange.io/mcp/http"
+bearer_token_env_var = "PACKETEXCHANGE_API_KEY"

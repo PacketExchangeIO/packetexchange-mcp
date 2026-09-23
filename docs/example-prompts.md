@@ -26,6 +26,8 @@ These use public tools only. They need no key and cost nothing.
 
 - "Send an SMS to +447700900123 from Acme saying: Your table for two at 7pm tonight is confirmed. Reply to this number to change it. Tell me the cost and segment count first."
 - "Call +447700900123 from +447700900456 with a 60-second limit and tell me how the call ended and what it cost."
+- "Call +447700900123 from +447700900456. When they answer, say: This is Acme Dental confirming your appointment tomorrow at 10am. Press 1 to confirm or 2 to cancel. Collect one digit, then tell me which key they pressed."
+- "Check on that call again and tell me its status, cost and the digit collected."
 
 For anything that spends money, ask the agent to show you the destination, the route and the expected cost before it sends.
 

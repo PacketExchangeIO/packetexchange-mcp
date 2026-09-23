@@ -1,11 +1,15 @@
 # Cursor
 
-Cursor reaches the hosted PacketExchange server through [`mcp-remote`](https://www.npmjs.com/package/mcp-remote), which it starts as a local command.
+Cursor connects to the hosted server directly over Streamable HTTP and reads your API key from an environment variable.
 
 ## Before you start
 
-- Install a current Node.js LTS release, so that `npx` is available.
 - No account is needed for the public tools. Account tools need a PacketExchange account with prepaid credit and an API key; read [security.md](../security.md) first.
+- Set `PACKETEXCHANGE_API_KEY` in the environment Cursor starts from, for example in your shell profile, then start Cursor from that shell:
+
+  ```sh
+  export PACKETEXCHANGE_API_KEY="your-api-key"
+  ```
 
 ## Steps
 
@@ -18,8 +22,10 @@ Cursor reaches the hosted PacketExchange server through [`mcp-remote`](https://w
    {
      "mcpServers": {
        "packetexchange": {
-         "command": "npx",
-         "args": ["-y", "mcp-remote", "https://packetexchange.io/mcp/sse", "--transport", "sse-only"]
+         "url": "https://packetexchange.io/mcp/http",
+         "headers": {
+           "Authorization": "Bearer ${env:PACKETEXCHANGE_API_KEY}"
+         }
        }
      }
    }
@@ -28,7 +34,7 @@ Cursor reaches the hosted PacketExchange server through [`mcp-remote`](https://w
    If the file already lists other servers, add only the `"packetexchange": { ... }` entry inside the existing `mcpServers` object.
 3. Open **Cursor Settings**, find the MCP section, and check that `packetexchange` is enabled and shows its tools.
 
-A project-level `.cursor/mcp.json` is often committed to version control. The configuration above contains no credentials, and it should stay that way.
+Cursor replaces `${env:PACKETEXCHANGE_API_KEY}` with the variable's value, so the file itself contains no credentials. A project-level `.cursor/mcp.json` is often committed to version control; keep keys out of it.
 
 ## Check it works
 
@@ -38,5 +44,6 @@ In the agent chat, ask:
 
 ## Troubleshooting
 
-- **No tools are listed:** run `npx -y mcp-remote https://packetexchange.io/mcp/sse --transport sse-only` in a terminal to see the error.
-- **A tool call fails with a connection or session error:** retry it. If it keeps failing, turn the server off and on again in Cursor Settings.
+- **Account tools say the key is missing:** Cursor did not see the variable. Start Cursor from a terminal where `echo $PACKETEXCHANGE_API_KEY` prints your key.
+- **A tool fails with 401 or 403:** the key is invalid, or lacks the scope the tool needs. [tools.md](../tools.md) lists the scope for each tool.
+- **No tools are listed:** turn the server off and on again in Cursor Settings, and check the MCP output panel for errors.

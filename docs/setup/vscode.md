@@ -1,6 +1,6 @@
 # VS Code
 
-VS Code connects to the hosted server directly over SSE, with no bridge to install. MCP tools are used from chat in agent mode.
+VS Code connects to the hosted server directly over Streamable HTTP, with no bridge to install. MCP tools are used from chat in agent mode.
 
 ## Before you start
 
@@ -13,22 +13,31 @@ VS Code connects to the hosted server directly over SSE, with no bridge to insta
 
    ```json
    {
+     "inputs": [
+       {
+         "type": "promptString",
+         "id": "packetexchange-api-key",
+         "description": "PacketExchange API key",
+         "password": true
+       }
+     ],
      "servers": {
        "packetexchange": {
-         "type": "sse",
-         "url": "https://packetexchange.io/mcp/sse"
+         "type": "http",
+         "url": "https://packetexchange.io/mcp/http",
+         "headers": {
+           "Authorization": "Bearer ${input:packetexchange-api-key}"
+         }
        }
      }
    }
    ```
 
-   If the file already exists, add only the `"packetexchange": { ... }` entry inside `servers`.
-2. Save the file. VS Code shows a **Start** action above the server entry; select it.
+   If the file already exists, add the input to `inputs` and the `"packetexchange": { ... }` entry to `servers`.
+2. Save the file. VS Code shows a **Start** action above the server entry; select it. The first time, VS Code asks for your API key and stores it securely, so the key never appears in the file.
 3. Open chat, switch to agent mode, and open the tools picker to confirm the PacketExchange tools are listed.
 
-To use the server in every workspace, run **MCP: Open User Configuration** from the Command Palette and add the same entry there.
-
-Keep `"type": "sse"`. The endpoint speaks the SSE transport only.
+To use the server in every workspace, run **MCP: Open User Configuration** from the Command Palette and add the same entries there.
 
 ## Check it works
 
@@ -39,4 +48,4 @@ In agent mode, ask:
 ## Troubleshooting
 
 - **The server does not start:** run **MCP: List Servers** from the Command Palette, select `packetexchange` and choose **Show Output**.
-- **A tool call fails with a connection or session error:** retry it. If it keeps failing, restart the server from **MCP: List Servers**.
+- **A tool fails with 401 or 403:** the key is invalid, or lacks the scope the tool needs. [tools.md](../tools.md) lists the scope for each tool.

@@ -5,7 +5,9 @@
     "MD013": false,
     // The README opens with a centred logo block rather than a Markdown heading.
     "MD033": { "allowed_elements": ["p", "img", "a", "h1", "br"] },
-    "MD041": false
+    "MD041": false,
+    // The changelog repeats "Added" and "Changed" under each release.
+    "MD024": { "siblings_only": true }
   },
   "globs": ["**/*.md"],
   "ignores": ["node_modules/**"]
