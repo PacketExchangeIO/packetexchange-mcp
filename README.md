@@ -1,8 +1,6 @@
 <p align="center">
-  <img src="assets/logo.png" alt="PacketExchange" width="96" height="96">
+  <a href="https://packetexchange.io"><img src="assets/banner.png" alt="PacketExchange MCP server" width="100%"></a>
 </p>
-
-<h1 align="center">PacketExchange MCP</h1>
 
 <p align="center">Connect AI agents and MCP clients to the PacketExchange voice and SMS marketplace.</p>
 
