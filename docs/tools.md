@@ -16,11 +16,11 @@ Amounts are US dollars. The platform fee is 2% of the route rate, capped at $0.0
 
 | Tool | What it does | Key parameters | Access | Cost |
 | --- | --- | --- | --- | --- |
-| `wmmn_list_routes` | Searches live voice and SMS routes on the marketplace. For a route with a multi-destination rate deck, the price shown is its cheapest rate. | `country`, `type` (`voice`, `sms`), `max_price`, `min_asr`, `cli_type` (`full_cli`, `local_cli`, `mixed_cli`, `ncli`), `route_type` (`direct`, `premium`, `standard`, `ncli`), `search`, `sort`, `limit` (1-100, default 25) | Public | Free |
+| `wmmn_list_routes` | Searches live voice and SMS routes on the marketplace. By default it returns one row per route and mobile network, proven routes first, and each row carries what PacketExchange measured on that network: `route_status` (`proven`, `weak`, `at_risk`, `untested`), `signal_bars` (0-4), `caller_id` (`full`, `replaced`, `none`, `untested`) and `proven_at`. With `per_network` set to false it returns one row per listing, and a multi-destination rate deck then shows its cheapest rate. | `country`, `type` (`voice`, `sms`), `max_price`, `min_asr`, `cli_type` (`full_cli`, `local_cli`, `mixed_cli`, `ncli`), `route_type` (`direct`, `premium`, `standard`, `ncli`), `search`, `sort` (default `tested_desc`; also `cli_desc`), `per_network` (default true), `network`, `tested`, `verified_cli`, `limit` (1-100, default 25) | Public | Free |
 | `wmmn_route_details` | Full details for one route: pricing, billing increment, seller-stated ASR, ACD and PDD, caller ID handling, capacity, Exchange Score and seller trust profile. | `route_id` | Public | Free |
 | `wmmn_market_summary` | Marketplace totals: routes, destinations, and voice and SMS route counts. With a key on the connection, averages (capacity, ASR, ACD and price) are included too. | None | Public | Free |
 
-ASR, ACD and PDD figures on listings are stated by the seller, not measured by PacketExchange.
+ASR, ACD and PDD figures on listings are stated by the seller, not measured by PacketExchange. The route status and caller ID results on per-network rows are measured by PacketExchange, from real calls and its own caller ID tests to phones on each network.
 
 ## Route
 

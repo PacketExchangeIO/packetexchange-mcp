@@ -2,6 +2,12 @@
 
 All notable changes to this repository are recorded here.
 
+## [1.2.0] - 2026-10-12
+
+### Changed
+
+- `wmmn_list_routes` returns one row per route and mobile network by default, proven routes first (`tested_desc`), with the measured `route_status`, `signal_bars`, `caller_id` and `proven_at` on each row. New parameters: `per_network`, `network`, `tested` and `verified_cli`, and the `cli_desc` sort. Set `per_network` to false for the previous one-row-per-listing results.
+
 ## [1.1.0] - 2026-09-23
 
 ### Added
