@@ -7,6 +7,7 @@
 <p align="center">
   <a href="https://github.com/PacketExchangeIO/packetexchange-mcp/actions/workflows/ci.yml"><img src="https://github.com/PacketExchangeIO/packetexchange-mcp/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT license"></a>
+  <a href="https://smithery.ai/servers/packetexchange/voice-sms"><img src="https://smithery.ai/badge/packetexchange/voice-sms" alt="Smithery"></a>
 </p>
 
 PacketExchange runs a hosted [Model Context Protocol](https://modelcontextprotocol.io) server. Once your client is connected, an agent can search the marketplace, compare routes, run a phone verification, send an SMS, place a call and follow it, and check the account balance, by calling tools by name.
