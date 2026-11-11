@@ -2,6 +2,13 @@
 
 All notable changes to this repository are recorded here.
 
+## [1.3.0] - 2026-11-11
+
+### Added
+
+- `wmmn_list_routes` documents the `verification` tier on every voice listing (`cli`, `ncli`, `connected`, `not_verified`, best first) and the `verification` filter.
+- `wmmn_list_routes` documents caller ID origin pricing: the `origin_policy`, `origin_group` and `origin_price` fields and the `origin_policy` filter.
+
 ## [1.2.0] - 2026-10-12
 
 ### Changed
@@ -32,5 +39,7 @@ All notable changes to this repository are recorded here.
 - Security guidance and example prompts.
 - Continuous integration that lints the Markdown and validates the configurations against JSON schemas.
 
+[1.3.0]: https://github.com/PacketExchangeIO/packetexchange-mcp/releases/tag/v1.3.0
+[1.2.0]: https://github.com/PacketExchangeIO/packetexchange-mcp/releases/tag/v1.2.0
 [1.1.0]: https://github.com/PacketExchangeIO/packetexchange-mcp/releases/tag/v1.1.0
 [1.0.0]: https://github.com/PacketExchangeIO/packetexchange-mcp/releases/tag/v1.0.0
